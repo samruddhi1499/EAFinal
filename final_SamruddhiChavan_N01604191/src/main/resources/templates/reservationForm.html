@@ -1,50 +1,114 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Husky Air Reservation Form</title>
     <meta charset="UTF-8" />
+    <title>Husky Air Reservation Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            padding: 40px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        fieldset {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 15px;
+        }
+
+        legend {
+            font-weight: bold;
+            padding: 0 10px;
+            color: #444;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button[type="submit"] {
+            background-color: #000;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #333;
+        }
+    </style>
 </head>
 <body>
-    <h2>Reservation Form</h2>
+    <h2>Husky Air Reservation Form</h2>
 
-   <form th:action="@{/form}" method="post">
-    <!-- Reservation Fields -->
-    <fieldset th:object="${reservation}">
-        <legend>Reservation</legend>
-        <label>Details (Reservation):</label>
-        <input type="text" th:field="*{detailsReservation}" /><br/>
+    <form th:action="@{/form}" method="post">
+        <!-- Reservation Fields -->
+        <fieldset th:object="${reservation}">
+            <legend>Reservation</legend>
 
-        <label>Ticket Number:</label>
-        <input type="text" th:field="*{ticketnumber}" /><br/>
+            <label>Details (Reservation):</label>
+            <input type="text" th:field="*{detailsReservation}" />
 
-        <label>Date:</label>
-        <input type="date" th:field="*{date}" /><br/>
-
-        <!-- Payment Fields -->
-        <fieldset>
-            <legend>Payment</legend>
-            <label>Amount:</label>
-            <input type="number" th:field="*{payment.amount}" /><br/>
+            <label>Ticket Number:</label>
+            <input type="text" th:field="*{ticketnumber}" />
 
             <label>Date:</label>
-            <input type="date" th:field="*{payment.date}" /><br/>
+            <input type="date" th:field="*{date}" />
+
+            <!-- Payment Fields -->
+            <fieldset>
+                <legend>Payment</legend>
+                <label>Amount:</label>
+                <input type="number" th:field="*{payment.amount}" />
+
+                <label>Date:</label>
+                <input type="date" th:field="*{payment.date}" />
+            </fieldset>
         </fieldset>
-    </fieldset>
 
-    <!-- Customer Fields -->
-    <fieldset th:object="${customer}">
-        <legend>Customer</legend>
+        <!-- Customer Fields -->
+        <fieldset th:object="${customer}">
+            <legend>Customer</legend>
 
-        <label>Address:</label>
-        <input type="text" th:field="*{address}" /><br/>
+            <label>Address:</label>
+            <input type="text" th:field="*{address}" />
 
-        <label>Details (Customer):</label>
-        <input type="text" th:field="*{details}" /><br/>
-    </fieldset>
+            <label>Details (Customer):</label>
+            <input type="text" th:field="*{details}" />
+        </fieldset>
 
-    <br/>
-    <button type="submit">Submit Reservation</button>
-</form>
-
+        <button type="submit">Submit Reservation</button>
+    </form>
 </body>
 </html>

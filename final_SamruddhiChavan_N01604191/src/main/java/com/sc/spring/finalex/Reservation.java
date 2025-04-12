@@ -15,10 +15,6 @@ public class Reservation {
     @DBRef
     private Payment payment;
 
-    // update() placeholder method
-    public void update(String newDetails) {
-        this.detailsReservation = newDetails;
-    }
 
 	public Reservation() {
 		super();
@@ -33,6 +29,8 @@ public class Reservation {
 		this.date = date;
 		this.payment = payment;
 	}
+	
+	// Getters and Setters
 
 	public String getId() {
 		return id;
@@ -74,7 +72,12 @@ public class Reservation {
 		this.payment = payment;
 	}
 
-    // Getters and Setters
+    
+	
+    public void update(String newDetails) {
+        this.detailsReservation = newDetails;
+    }
+
     
     
 }

@@ -5,28 +5,23 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("payments")
 public class Payment {
-    @Id
-    private String id;
-    private int amount;
-    private String date;
-
-    public int calculate() {
-        // Placeholder for calculation logic
-        return amount;
-    }
+	@Id
+	private String id;
+	private int amount;
+	private String date;
 
 	public Payment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Payment(String id, int amount, String date) {
+	public Payment( int amount, String date) {
 		super();
-		this.id = id;
 		this.amount = amount;
 		this.date = date;
 	}
 
+	// Getters and Setters
 	public String getId() {
 		return id;
 	}
@@ -51,6 +46,10 @@ public class Payment {
 		this.date = date;
 	}
 
-    // Getters and Setters
-    
+	public int calculate() {
+		int tax = (int) (amount * 0.13);
+
+		return amount + tax;
+	}
+
 }

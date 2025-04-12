@@ -17,13 +17,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ReservationController {
 
     @Autowired
-    private ReservationRepository reservationRepository;
+    private ReservationService reservationServcice;
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private CustomerService customerService;
 
-    @Autowired
-    private PaymentRepository paymentRepository;
+
 
     private final ObjectMapper objectMapper = new ObjectMapper(); 
     
@@ -42,17 +41,17 @@ public class ReservationController {
             @ModelAttribute Customer customer) {
 
         try {
-            // Serialize using Jackson
+           
             String reservationJson = objectMapper.writeValueAsString(reservation);
             String customerJson = objectMapper.writeValueAsString(customer);
 
             System.out.println("Submitted Reservation JSON:\n" + reservationJson);
             System.out.println("Submitted Customer JSON:\n" + customerJson);
 
-            // Write JSON to target/ folder
+            
             File targetDir = new File("target");
             if (!targetDir.exists()) {
-                targetDir.mkdirs(); // create target directory if not exists
+                targetDir.mkdirs(); 
             }
 
             FileWriter reservationWriter = new FileWriter("target/reservation.json");
@@ -66,16 +65,11 @@ public class ReservationController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // Save Payment first (embedded in reservation)
-        paymentRepository.save(reservation.getPayment());
-
-        // Save Reservation
-        reservationRepository.save(reservation);
-
-     
+        
+        reservation = reservationServcice.add(reservation);
+        
         customer.setReservation(reservation.getId());
-        customerRepository.save(customer);
+        customerService.add(customer);
 
         return "reservationForm"; 
     }

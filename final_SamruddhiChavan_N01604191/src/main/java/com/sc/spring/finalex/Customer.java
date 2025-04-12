@@ -5,33 +5,26 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("customers")
 public class Customer {
-    @Id
-    private String id;
-    private String address;
-    private String reservation; 
-    private String details;
-
-    public void add() {
-        // placeholder
-    }
-
-    public void update(String address) {
-        this.address = address;
-    }
+	@Id
+	private String id;
+	private String address;
+	private String reservation;
+	private String details;
 
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Customer(String id, String address, String reservation, String details) {
+	public Customer(String address, String reservation, String details) {
 		super();
-		this.id = id;
+
 		this.address = address;
 		this.reservation = reservation;
 		this.details = details;
 	}
 
+	// Getters and Setters
 	public String getId() {
 		return id;
 	}
@@ -64,6 +57,6 @@ public class Customer {
 		this.details = details;
 	}
 
-    // Getters and Setters
-    
+
+
 }
